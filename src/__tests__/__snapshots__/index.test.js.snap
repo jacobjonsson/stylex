@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`media-queries.js 1`] = `
+"import stylex from \\"stylex\\";
+const styles = {
+  root: \\"xadsd7g x1lyv7vr\\"
+};
+export function Component() {
+  return <div className={stylex.resolve(styles.root)} />;
+}"
+`;
+
+exports[`media-queries.js 2`] = `
+Object {
+  "stylex": ".xadsd7g {font-size: 12;}
+@media (min-width: 768px): {.x1lyv7vr {font-size: 14;}}",
+}
+`;
+
+exports[`nested-selectors.js 1`] = `
+"import stylex from \\"stylex\\";
+const styles = {
+  root: \\"xadsd7g xmsj4j\\"
+};
+export function Component() {
+  return <div className={stylex.resolve(styles.root)} />;
+}"
+`;
+
+exports[`nested-selectors.js 2`] = `
+Object {
+  "stylex": ".xadsd7g {font-size: 12;}
+@media (min-width: 768px): {.x1lyv7vr {font-size: 14;}}
+.xmsj4j > p {color: white;}",
+}
+`;
+
+exports[`simple.js 1`] = `
+"import stylex from \\"stylex\\";
+const styles = {
+  root: \\"xadsd7g\\"
+};
+export function Component() {
+  return <div className={stylex.resolve(styles.root)} />;
+}"
+`;
+
+exports[`simple.js 2`] = `
+Object {
+  "stylex": ".xadsd7g {font-size: 12;}",
+}
+`;

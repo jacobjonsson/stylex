@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`macros 1. macros: 1. macros 1`] = `
+
+import stylex from '../macro'
+
+const styles = stylex.create({
+  root: {
+    backgroundColor: 'red',
+    fontSize: 12
+  },
+  blue: {
+    backgroundColor: 'blue',
+  }
+});
+
+export function MyApp(props) {
+  return <div className={stylex.resolve(styles.root, props.blue && styles.blue)} />
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const styles = {
+  root: "xlo2o0v xadsd7g",
+  blue: "x1oa3ix8",
+};
+export function MyApp(props) {
+  return <div className={stylex.resolve(styles.root, props.blue && styles.blue)} />;
+}
+
+
+`;
