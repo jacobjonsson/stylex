@@ -1,6 +1,5 @@
 import hash from "./fnv1a";
 
-const id = (seed) => "x" + hash(seed).toString(36);
 const hyphenate = (s) => s.replace(/[A-Z]|^ms/g, "-$&").toLowerCase();
 
 function createClassName(seed) {

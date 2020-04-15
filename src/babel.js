@@ -1,10 +1,6 @@
-import { writeFileSync } from "fs";
-import { join } from "path";
 import evaluateSimple from "babel-helper-evaluate-path";
 import jsx from "@babel/plugin-syntax-jsx";
-import StyleSheet from "./style-sheet";
-
-const { create, toString } = StyleSheet();
+import { styleSheet } from "./stylesheet";
 
 function isCreateCall(path) {
   return (
@@ -23,12 +19,6 @@ export default function stylexBabelPlugin(babel) {
     name: "stylex",
     inherits: jsx,
     visitor: {
-      Program: {
-        enter() {},
-        exit() {
-          writeFileSync(join(__dirname, "stylex.cache.css"), toString());
-        },
-      },
       CallExpression(path, state) {
         if (!isCreateCall(path)) {
           return;
@@ -46,7 +36,7 @@ export default function stylexBabelPlugin(babel) {
           }
 
           let result = evaluateSimple(property.get("value"));
-          const className = create(result.value);
+          const className = styleSheet.create(result.value);
 
           extractableProperties.push(
             t.objectProperty(cloneNode(property.get("key").node), t.stringLiteral(className))

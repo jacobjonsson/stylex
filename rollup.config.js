@@ -8,16 +8,20 @@ fs.rmdirSync(path.join(__dirname, "dist"), { recursive: true });
 
 export default [
   {
-    input: "src/babel.js",
+    input: {
+      babel: "src/babel.js",
+      webpack: "src/webpack.js",
+    },
     external: [
       "babel-helper-evaluate-path",
       "@babel/plugin-syntax-jsx",
       "@babel/helper-module-imports",
       "fs",
       "path",
+      "webpack-sources",
     ],
     output: {
-      file: "dist/babel.js",
+      dir: "dist",
       format: "cjs",
     },
     plugins: [babel({ exclude: "node_modules/**" }), resolve(), commonjs()],
@@ -27,14 +31,6 @@ export default [
     output: {
       file: "dist/index.js",
       format: "esm",
-    },
-    plugins: [babel({ exclude: "node_modules/**" }), resolve()],
-  },
-  {
-    input: "src/webpack.js",
-    output: {
-      file: "dist/webpack.js",
-      format: "cjs",
     },
     plugins: [babel({ exclude: "node_modules/**" }), resolve()],
   },
