@@ -8,7 +8,6 @@
 const Stylex = require("stylex/dist/webpack")
 
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
-  console.log(stage)
   let config = {}
   switch (stage) {
     case "build-html":

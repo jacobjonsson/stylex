@@ -1,28 +1,35 @@
-import parse from "./parse";
+import parse from './lib/parse';
 
-class StyleSheet {
-  constructor() {
-    this.cache = new Map();
-  }
+function StyleSheet() {
+  let cache = new Map();
 
-  create(styles) {
-    const locals = [];
-    const parsedRules = parse(styles);
+  return {
+    /**
+     * @param {Record<string, string | object>} styles
+     * @returns {string[]}
+     */
+    create(styles) {
+      let locals = [];
+      let parsedRules = parse(styles);
 
-    parsedRules.forEach((rule) => {
-      if (!this.cache.has(rule.className)) {
-        this.cache.set(rule.className, rule.css);
-      }
+      parsedRules.forEach((rule) => {
+        if (!cache.has(rule.className)) {
+          cache.set(rule.className, rule.css);
+        }
 
-      locals.push(rule.className);
-    });
+        locals.push(rule.className);
+      });
 
-    return locals.join(" ");
-  }
+      return locals;
+    },
 
-  extractCSS() {
-    return Array.from(this.cache.values()).join("\n").trim();
-  }
+    /**
+     * @returns {string}
+     */
+    extractCSS() {
+      return Array.from(cache.values()).join('\n').trim();
+    },
+  };
 }
 
 export let styleSheet = new StyleSheet();

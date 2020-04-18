@@ -5,31 +5,37 @@ import Child2 from "../components/Child2"
 import Child3 from "../components/Child3"
 import Child4 from "../components/Child4"
 
-const styles = stylex.create({
-  heading: {
-    fontSize: "20px",
-    backgroundColor: "red",
-    padding: "30px",
-  },
+const heading = stylex.create`
+  background-color: red;
+  font-size: 100px;
 
-  p: {
-    fontSize: "20px",
-    color: "red",
-    padding: "20px",
-    backgroundColor: "red",
-  },
-})
+  @media (min-width: 768px) {
+    background-color: yellow;
+  }
+`
 
-const IndexPage = () => (
-  <React.Fragment>
-    <h1 className={stylex.resolve(styles.heading)}>Hi people</h1>
-    <p className={stylex.resolve(styles.p)}>Hi people</p>
+const blue = stylex.create`
+  background-color: blue;
 
-    <Child1 />
-    <Child2 />
-    <Child3 />
-    <Child4 />
-  </React.Fragment>
-)
+  @media (min-width: 768px) {
+    background-color: green;
+  }
+`
+
+const IndexPage = () => {
+  const [isBlue, setIsBlue] = React.useState(false)
+
+  return (
+    <React.Fragment>
+      <h1 className={stylex.resolve(heading, isBlue && blue)}>Hi people</h1>
+      <button onClick={() => setIsBlue(!isBlue)}>Toggle blue class</button>
+
+      <Child1 />
+      <Child2 />
+      <Child3 />
+      <Child4 />
+    </React.Fragment>
+  )
+}
 
 export default IndexPage

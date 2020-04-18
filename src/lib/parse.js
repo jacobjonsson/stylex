@@ -1,9 +1,9 @@
-import hash from "./fnv1a";
+import hash from './fnv1a';
 
-const hyphenate = (s) => s.replace(/[A-Z]|^ms/g, "-$&").toLowerCase();
+const hyphenate = (s) => s.replace(/[A-Z]|^ms/g, '-$&').toLowerCase();
 
 function createClassName(seed) {
-  return "x" + hash(seed).toString(36);
+  return 'x' + hash(seed).toString(36);
 }
 
 const createRule = (className, key, value, children, media) => {
@@ -11,13 +11,13 @@ const createRule = (className, key, value, children, media) => {
   const rule = `${selector} {${hyphenate(key)}: ${value};}`;
 
   if (media) {
-    return `${media}: {${rule}}`;
+    return `${media} {${rule}}`;
   }
 
   return rule;
 };
 
-export default function parse(obj, children = "", media) {
+export default function parse(obj, children = '', media) {
   const rules = [];
 
   for (const [key, value] of Object.entries(obj)) {
@@ -26,17 +26,17 @@ export default function parse(obj, children = "", media) {
     }
 
     switch (typeof value) {
-      case "object":
+      case 'object':
         if (/^@/.test(key)) {
           rules.push(...parse(value, children, key));
         } else {
-          rules.push(...parse(value, children + key.replace(/&/g, ""), media));
+          rules.push(...parse(value, children + key.replace(/&/g, ''), media));
         }
 
         continue;
-      case "number":
-      case "string":
-        const className = createClassName(`${key} ${value} ${children} ${media || ""}`);
+      case 'number':
+      case 'string':
+        const className = createClassName(`${key} ${value} ${children} ${media || ''}`);
         const css = createRule(className, key, value, children, media);
         rules.push({ className, css });
     }

@@ -1,6 +1,6 @@
-import parse from "../parse";
+import parse from '../parse';
 
-it("should handle a simple case", () => {
+it('should handle a simple case', () => {
   const result = parse({ fontSize: 12 });
   expect(result).toMatchInlineSnapshot(`
     Array [
@@ -12,10 +12,10 @@ it("should handle a simple case", () => {
   `);
 });
 
-it("should handle media queries", () => {
+it('should handle media queries', () => {
   const result = parse({
     fontSize: 12,
-    "@media (min-width: 768px)": { width: "320px" },
+    '@media (min-width: 768px)': { width: '320px' },
   });
 
   expect(result).toMatchInlineSnapshot(`
@@ -32,13 +32,13 @@ it("should handle media queries", () => {
   `);
 });
 
-it("should handle nested selectors", () => {
+it('should handle nested selectors', () => {
   const result = parse({
     fontSize: 12,
-    "& > p": {
+    '& > p': {
       fontSize: 12,
     },
-    "&:hover": {
+    '&:hover': {
       fontSize: 14,
     },
   });
@@ -61,10 +61,10 @@ it("should handle nested selectors", () => {
   `);
 });
 
-it("should handle psuedo selectors", () => {
+it('should handle psuedo selectors', () => {
   const result = parse({
     fontSize: 12,
-    "&:hover": {
+    '&:hover': {
       fontSize: 14,
     },
   });

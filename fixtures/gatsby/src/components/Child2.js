@@ -1,15 +1,13 @@
 import React from "react"
 import stylex from "stylex"
 
-const styles = stylex.create({
-  root: {
-    fontSize: "16px",
-    backgroundColor: "red",
-    padding: "20px",
-    color: "white",
-  },
-})
+const base = stylex.create`
+  font-size: 16px;
+  background-color: red;
+  padding: 20px;
+  color: white;
+`
 
-export default function Child1() {
-  return <div className={stylex.resolve(styles.root)}>Child 1</div>
+export default function Child2() {
+  return <div className={stylex.resolve(base)}>Child 1</div>
 }
