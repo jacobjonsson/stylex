@@ -25,7 +25,7 @@ it('should handle a simple example', () => {
 
     const { code } = transpile(input);
     expect(code).toMatchInlineSnapshot(`
-        "import { stylex, cx } from 'stylex';
+        "import { stylex, cx } from '@jacobjonsson/stylex';
         const base = [\\"x1t4qh4s\\"];
         export default function Component() {
           return <div className={cx(base)} />;
@@ -54,7 +54,7 @@ it('should handle media queries', () => {
 
     const { code } = transpile(input);
     expect(code).toMatchInlineSnapshot(`
-        "import { stylex, cx } from 'stylex';
+        "import { stylex, cx } from '@jacobjonsson/stylex';
         const base = [\\"x1t4qh4s\\", \\"x15bxnfn\\"];
         export default function Component() {
           return <div className={cx(base)} />;
@@ -83,7 +83,7 @@ it('should handle nested selectors', () => {
 
     const { code } = transpile(input);
     expect(code).toMatchInlineSnapshot(`
-        "import { stylex, cx } from 'stylex';
+        "import { stylex, cx } from '@jacobjonsson/stylex';
         const base = [\\"x1t4qh4s\\", \\"x1iph7ta\\"];
         export default function Component() {
           return <div className={cx(base)} />;
@@ -112,7 +112,7 @@ it('should handle conditionals', () => {
 
     const { code } = transpile(input);
     expect(code).toMatchInlineSnapshot(`
-        "import { stylex, cx } from 'stylex';
+        "import { stylex, cx } from '@jacobjonsson/stylex';
         const base = [\\"x1t4qh4s\\"];
         const blue = [\\"x142c91x\\"];
         export default function Component(props) {

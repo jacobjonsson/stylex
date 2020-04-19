@@ -1,5 +1,5 @@
 {
-  "name": "stylex",
+  "name": "@jacobjonsson/stylex",
   "version": "0.0.0",
   "description": "Compile time css in js",
   "main": "dist/index.js",

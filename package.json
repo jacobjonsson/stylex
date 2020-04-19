@@ -11,7 +11,7 @@
   "scripts": {
     "format": "yarn run prettier \"{packages,fixtures}\" --write",
     "test": "yarn run jest",
-    "build:core": "yarn workspace stylex build",
+    "build:core": "yarn workspace @jacobjonsson/stylex build",
     "cra:build": "yarn build:core && yarn workspace @fixtures/cra build",
     "gatsby:develop": "yarn build:core && yarn workspace @fixtures/gatsby develop",
     "gatsby:build": "yarn build:core && yarn workspace @fixtures/gatsby build"

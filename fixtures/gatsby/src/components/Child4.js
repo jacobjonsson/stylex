@@ -1,5 +1,5 @@
 import React from 'react';
-import { stylex, cx } from 'stylex';
+import { stylex, cx } from '@jacobjonsson/stylex';
 
 const base = stylex`
   font-size: 16px;

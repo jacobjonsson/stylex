@@ -8,7 +8,7 @@ module.exports = {
         `gatsby-plugin-react-helmet`,
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
-        `gatsby-plugin-stylex`,
+        `@jacobjonsson/gatsby-plugin-stylex`,
         {
             resolve: `gatsby-plugin-manifest`,
             options: {

@@ -1,6 +1,6 @@
 exports.onCreateWebpackConfig = ({ actions, rules }) => {
     const stylexLoader = {
-        loader: 'stylex/dist/loader',
+        loader: '@jacobjonsson/stylex/dist/loader',
         options: {
             babelOptions: {
                 presets: ['babel-preset-gatsby'],

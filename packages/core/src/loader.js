@@ -36,7 +36,6 @@ export default function loader(source) {
 
     try {
         currentCssText = fs.readFileSync(outputFilename, 'utf-8');
-        console.log(currentCssText.split('\n'));
     } catch (e) {
         // Ignore error
     }
