@@ -1,13 +1,13 @@
-import React from "react"
-import stylex from "stylex"
+import React from 'react';
+import { stylex, cx } from 'stylex';
 
-const base = stylex.create`
+const base = stylex`
   font-size: 16px;
   background-color: red;
-  padding: 20px;
+  padding: 30px;
   color: white;
-`
+`;
 
 export default function Child3() {
-  return <div className={stylex.resolve(base)}>Child 1</div>
+    return <div className={cx(base)}>Child 1</div>;
 }

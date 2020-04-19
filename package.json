@@ -3,40 +3,18 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "license": "MIT",
-  "files": [
-    "dist/"
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "fixtures/*"
   ],
-  "jest": {
-    "testMatch": [
-      "**/__tests__/**/*.test.[jt]s?(x)"
-    ],
-    "testPathIgnorePatterns": [
-      "example"
-    ]
-  },
-  "prettier": {
-    "tabWidth": 2,
-    "printWidth": 100,
-    "singleQuote": true,
-    "trailingComma": "all"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-optional-chaining"
-    ]
-  },
   "scripts": {
-    "format": "yarn run prettier src --write",
-    "prepublish": "yarn build",
-    "test": "jest",
-    "build": "yarn run rollup -c",
-    "build:fixture": "(cd fixtures/cra && yarn build)",
-    "all:gatsby:build": "yarn build && (cd fixtures/gatsby && yarn build && yarn serve)",
-    "all:gatsby:develop": "yarn build && (cd fixtures/gatsby && yarn start)"
+    "format": "yarn run prettier \"{packages,fixtures}\" --write",
+    "test": "yarn run jest",
+    "build:core": "yarn workspace stylex build",
+    "cra:build": "yarn build:core && yarn workspace @fixtures/cra build",
+    "gatsby:develop": "yarn build:core && yarn workspace @fixtures/gatsby develop",
+    "gatsby:build": "yarn build:core && yarn workspace @fixtures/gatsby build"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -52,12 +30,5 @@
     "prettier": "^2.0.4",
     "rollup": "^2.6.1",
     "rollup-plugin-babel": "^4.4.0"
-  },
-  "dependencies": {
-    "@babel/helper-module-imports": "^7.8.3",
-    "@babel/plugin-syntax-jsx": "^7.8.3",
-    "babel-helper-evaluate-path": "^0.5.0",
-    "css": "^2.2.4",
-    "stylis": "^3.5.4"
   }
 }

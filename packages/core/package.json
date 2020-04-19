@@ -1,0 +1,22 @@
+{
+  "name": "stylex",
+  "version": "0.0.0",
+  "description": "Compile time css in js",
+  "main": "dist/index.js",
+  "repository": "https://github.com/jacobjonsson/stylex",
+  "author": "Jacob Jonsson <jacobjjonsson@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "yarn run rollup -c",
+    "test": "yarn run jest"
+  },
+  "dependencies": {
+    "loader-utils": "2.0.0",
+    "@babel/plugin-syntax-jsx": "^7.8.3",
+    "css": "^2.2.4",
+    "stylis": "^3.5.4",
+    "find-yarn-workspace-root": "1.2.1",
+    "mkdirp": "1.0.4"
+  }
+}
