@@ -8,22 +8,19 @@ Should have first class support for theming and design tokens.
 Goal API
 
 ```jsx
-const styles = stylex.create(({ spacing, colors, ...etc }) => ({
-  base: {
-    marginBottom: spacing.small,
-    marginTop: spacing.large,
-    backgroundColor: colors.gray,
-  },
-  blue: {
-    backgroundColor: colors.blue,
-  },
-}));
+import { stylex, cx } from '@jacobjonsson/stylex';
 
-function Button({ blue, children }) {
-  return (
-    <button className={stylex(styles.base, blue && styles.blue)}>
-      {children}
-    </button>
-  );
+const base = stylex`
+    margin-bottom: ${(theme) => theme.spacing.small};
+    margin-top: ${(theme) => theme.spacing.small};
+    background-color: ${(theme) => theme.colors.red};
+`;
+
+const blue = stylex`
+    background-color: ${(theme) => theme.colors.blue};
+`;
+
+function Button(props) {
+    return <button className={cx(base, props.blue && blue)}>{props.children}</button>;
 }
 ```
