@@ -6,7 +6,6 @@
   "repository": "https://github.com/jacobjonsson/stylex",
   "author": "Jacob Jonsson <jacobjjonsson@gmail.com>",
   "license": "MIT",
-  "private": false,
   "scripts": {
     "build": "yarn run rollup -c",
     "test": "yarn run jest"
@@ -18,5 +17,6 @@
     "loader-utils": "2.0.0",
     "mkdirp": "1.0.4",
     "stylis": "^3.5.4"
-  }
+  },
+  "gitHead": "8efaaf26c96fa9a48c2d1ebb8f9d0fef1319ea33"
 }
