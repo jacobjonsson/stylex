@@ -3,3 +3,4 @@ src
 rollup.config.js
 yarn-error.log
 .babelrc
+jest.config.js
