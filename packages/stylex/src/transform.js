@@ -2,8 +2,6 @@ import plugin from './babel';
 import { parseSync, transformFromAstSync } from '@babel/core';
 
 export default function transform(code, options) {
-    // Check if the file contains stylex`
-    // Otherwise we should skip transforming
     if (!/\b(stylex`)/.test(code)) {
         return { code };
     }

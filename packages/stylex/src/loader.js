@@ -5,10 +5,11 @@ import loaderUtils from 'loader-utils';
 import transform from './transform';
 
 const buildId = '_' + Math.random().toString(36).substr(2, 9);
+const extension = '.stylex.css';
+const cacheDirectory = '.stylex-cache';
 
 export default function loader(source) {
-    const { cacheDirectory = '.stylex-cache', extension = '.stylex.css', babelOptions } =
-        loaderUtils.getOptions(this) || {};
+    const { babelOptions } = loaderUtils.getOptions(this) || {};
 
     const outputFilename = path.normalize(
         path.join(
@@ -29,21 +30,15 @@ export default function loader(source) {
         return source;
     }
 
-    // Read the file first to compare the content
-    // Write the new content only if it's changed
-    // This will prevent unnecessary WDS reloads
     let currentCssText;
-
     try {
         currentCssText = fs.readFileSync(outputFilename, 'utf-8');
-    } catch (e) {
-        // Ignore error
-    }
+    } catch (e) {}
 
     if (currentCssText !== result.css) {
         mkdirp.sync(path.dirname(outputFilename));
         fs.writeFileSync(outputFilename, result.css.join('\n'));
     }
 
-    return `${result.code}\n\nrequire(${loaderUtils.stringifyRequest(this, outputFilename)});`;
+    return `require(${loaderUtils.stringifyRequest(this, outputFilename)});\n${result.code}`;
 }
