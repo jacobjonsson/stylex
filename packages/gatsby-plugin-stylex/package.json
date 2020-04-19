@@ -1,6 +1,6 @@
 {
   "name": "@jacobjonsson/gatsby-plugin-stylex",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Gatsby plugin for stylex",
   "main": "index.js",
   "repository": "https://github.com/jacobjonsson/stylex",
