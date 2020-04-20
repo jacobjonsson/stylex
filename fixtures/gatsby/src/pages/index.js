@@ -9,6 +9,8 @@ const heading = stylex`
   background-color: red;
   font-size: 100px;
 
+  padding: ${(theme) => theme.spacing.medium};
+
   @media (min-width: 768px) {
     background-color: yellow;
   }
@@ -20,7 +22,7 @@ const blue = stylex`
   @media (min-width: 768px) {
     background-color: green;
   }
-  `;
+`;
 
 const IndexPage = () => {
     const [isBlue, setIsBlue] = React.useState(false);

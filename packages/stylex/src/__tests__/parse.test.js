@@ -3,13 +3,13 @@ import parse from '../parse';
 it('should handle a simple case', () => {
     const result = parse({ fontSize: 12 });
     expect(result).toMatchInlineSnapshot(`
-    Array [
-      Object {
-        "className": "xadsd7g",
-        "css": ".xadsd7g {font-size: 12;}",
-      },
-    ]
-  `);
+            Array [
+              Object {
+                "className": "xadsd7g",
+                "css": ".xadsd7g {font-size: 12;}",
+              },
+            ]
+      `);
 });
 
 it('should handle media queries', () => {
@@ -19,17 +19,17 @@ it('should handle media queries', () => {
     });
 
     expect(result).toMatchInlineSnapshot(`
-    Array [
-      Object {
-        "className": "xadsd7g",
-        "css": ".xadsd7g {font-size: 12;}",
-      },
-      Object {
-        "className": "xiyxedt",
-        "css": "@media (min-width: 768px): {.xiyxedt {width: 320px;}}",
-      },
-    ]
-  `);
+        Array [
+          Object {
+            "className": "xadsd7g",
+            "css": ".xadsd7g {font-size: 12;}",
+          },
+          Object {
+            "className": "xiyxedt",
+            "css": "@media (min-width: 768px) {.xiyxedt {width: 320px;}}",
+          },
+        ]
+    `);
 });
 
 it('should handle nested selectors', () => {
@@ -44,21 +44,21 @@ it('should handle nested selectors', () => {
     });
 
     expect(result).toMatchInlineSnapshot(`
-    Array [
-      Object {
-        "className": "xadsd7g",
-        "css": ".xadsd7g {font-size: 12;}",
-      },
-      Object {
-        "className": "x1cflrwy",
-        "css": ".x1cflrwy > p {font-size: 12;}",
-      },
-      Object {
-        "className": "x1gl39q6",
-        "css": ".x1gl39q6:hover {font-size: 14;}",
-      },
-    ]
-  `);
+            Array [
+              Object {
+                "className": "xadsd7g",
+                "css": ".xadsd7g {font-size: 12;}",
+              },
+              Object {
+                "className": "x1cflrwy",
+                "css": ".x1cflrwy > p {font-size: 12;}",
+              },
+              Object {
+                "className": "x1gl39q6",
+                "css": ".x1gl39q6:hover {font-size: 14;}",
+              },
+            ]
+      `);
 });
 
 it('should handle psuedo selectors', () => {
@@ -70,15 +70,15 @@ it('should handle psuedo selectors', () => {
     });
 
     expect(result).toMatchInlineSnapshot(`
-    Array [
-      Object {
-        "className": "xadsd7g",
-        "css": ".xadsd7g {font-size: 12;}",
-      },
-      Object {
-        "className": "x1gl39q6",
-        "css": ".x1gl39q6:hover {font-size: 14;}",
-      },
-    ]
-  `);
+            Array [
+              Object {
+                "className": "xadsd7g",
+                "css": ".xadsd7g {font-size: 12;}",
+              },
+              Object {
+                "className": "x1gl39q6",
+                "css": ".x1gl39q6:hover {font-size: 14;}",
+              },
+            ]
+      `);
 });

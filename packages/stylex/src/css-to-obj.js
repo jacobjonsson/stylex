@@ -1,11 +1,14 @@
-// Fork of https://github.com/jxnblk/css-to-object/
-// which is MIT (c) jxnblk
 import { parse } from 'css';
 import stylis from 'stylis';
 
 const SEL = '_';
 const SELRE = new RegExp('^' + SEL);
 
+/**
+ * Turns a css string into an object
+ * @param {string} css
+ * @returns {object}
+ */
 export default function cssToObj(css) {
     const wrapped = stylis(SEL, css);
     const ast = parse(wrapped);

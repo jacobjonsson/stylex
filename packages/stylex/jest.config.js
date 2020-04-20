@@ -7,7 +7,7 @@ module.exports = {
     name: pkg.name,
     displayName: pkg.name,
     testMatch: [
-        '<rootDir>/packages/core/src/**/*.test.(tsx|ts|js)',
-        '<rootDir>/packages/core/src/**/*.test.(tsx|ts|js)',
+        '<rootDir>/packages/stylex/src/**/*.test.(tsx|ts|js)',
+        '<rootDir>/packages/stylex/src/**/*.test.(tsx|ts|js)',
     ],
 };

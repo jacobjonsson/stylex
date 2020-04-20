@@ -1,4 +1,4 @@
-import plugin from './babel';
+import plugin from './babel-plugin';
 import { parseSync, transformFromAstSync } from '@babel/core';
 
 export default function transform(code, options) {

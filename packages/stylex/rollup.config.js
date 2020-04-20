@@ -9,7 +9,7 @@ rmdirSync(join(__dirname, 'dist'), { recursive: true });
 export default [
     {
         input: {
-            babel: 'src/babel.js',
+            babel: 'src/babel-plugin.js',
             loader: 'src/loader.js',
         },
         external: [
@@ -21,6 +21,7 @@ export default [
             'path',
             'fs',
             'mkdirp',
+            'babel-generator',
         ],
         output: {
             dir: 'dist',

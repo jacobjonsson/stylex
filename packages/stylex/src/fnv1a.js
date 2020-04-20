@@ -1,6 +1,3 @@
-// Fork of https://github.com/sindresorhus/fnv1a/
-// which is MIT (c) sindresorhus
-
 const FNV_OFFSET = 2166136261n;
 
 export default function fnv1a(string) {
