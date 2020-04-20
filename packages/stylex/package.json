@@ -1,6 +1,6 @@
 {
   "name": "@jacobjonsson/stylex",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Compile time css in js",
   "main": "dist/index.js",
   "repository": "https://github.com/jacobjonsson/stylex",
