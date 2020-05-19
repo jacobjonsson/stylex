@@ -12,9 +12,10 @@
     "format": "yarn run prettier \"{packages,fixtures}\" --write",
     "test": "yarn run jest",
     "build:core": "yarn workspace @jacobjonsson/stylex build",
+    "watch:core": "yarn workspace @jacobjonsson/stylex watch",
     "cra:build": "yarn build:core && yarn workspace @fixtures/cra build",
     "gatsby:develop": "yarn build:core && yarn workspace @fixtures/gatsby develop",
-    "gatsby:build": "yarn build:core && yarn workspace @fixtures/gatsby build"
+    "gatsby:build": "yarn build:core && yarn workspace @fixtures/gatsby build && yarn workspace @fixtures/gatsby serve"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -31,5 +32,11 @@
     "prettier": "^2.0.4",
     "rollup": "^2.6.1",
     "rollup-plugin-babel": "^4.4.0"
+  },
+  "prettier": {
+    "tabWidth": 4,
+    "printWidth": 100,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }

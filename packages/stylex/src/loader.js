@@ -1,44 +1,27 @@
-import fs from 'fs';
-import path from 'path';
-import mkdirp from 'mkdirp';
 import loaderUtils from 'loader-utils';
-import transform from './transform';
+import { transformSync } from '@babel/core';
+import { createBabelPlugin } from './plugin';
 
-const buildId = '_' + Math.random().toString(36).substr(2, 9);
-const extension = '.stylex.css';
-const cacheDirectory = '.stylex-cache';
+export default async function loader(source) {
+    const callback = this.async();
 
-export default function loader(source) {
-    const { babelOptions } = loaderUtils.getOptions(this) || {};
+    if (!/\b(stylex`)/.test(source)) {
+        return callback(null, source);
+    }
 
-    const outputFilename = path.normalize(
-        path.join(
-            path.isAbsolute(cacheDirectory)
-                ? cacheDirectory
-                : path.join(process.cwd(), cacheDirectory),
-            `${buildId}${extension}`,
-        ),
-    );
+    const { babelOptions, store } = loaderUtils.getOptions(this) || {};
 
-    const result = transform(source, {
-        filename: path.relative(process.cwd(), this.resourcePath),
-        outputFilename,
-        babelOptions,
+    const babelPresets = babelOptions.presets || [];
+    const babelPlugins = babelOptions.plugins || [];
+
+    const { code } = transformSync(source, {
+        presets: babelPresets,
+        plugins: [...babelPlugins, createBabelPlugin({ store })],
+        babelrc: false,
+        configFile: false,
     });
 
-    if (!result.css) {
-        return source;
-    }
+    store.addRequest(this.resource);
 
-    let currentCssText;
-    try {
-        currentCssText = fs.readFileSync(outputFilename, 'utf-8');
-    } catch (e) {}
-
-    if (currentCssText !== result.css) {
-        mkdirp.sync(path.dirname(outputFilename));
-        fs.writeFileSync(outputFilename, result.css.join('\n'));
-    }
-
-    return `require(${loaderUtils.stringifyRequest(this, outputFilename)});\n${result.code}`;
+    callback(null, code);
 }

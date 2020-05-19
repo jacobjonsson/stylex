@@ -1,21 +1,13 @@
-exports.onCreateWebpackConfig = ({ actions, rules }) => {
-    const stylexLoader = {
-        loader: '@jacobjonsson/stylex/dist/loader',
-        options: {
-            babelOptions: {
-                presets: ['babel-preset-gatsby'],
-            },
-        },
-    };
+const { StylexPlugin } = require('@jacobjonsson/stylex/dist/webpackPlugin');
 
-    const jsRules = {
-        ...rules.js(),
-        use: [...rules.js().use, stylexLoader],
-    };
-
+exports.onCreateWebpackConfig = ({ rules, actions, getConfig, stage }) => {
     actions.setWebpackConfig({
-        module: {
-            rules: [jsRules],
-        },
+        plugins: [
+            new StylexPlugin({
+                babelOptions: {
+                    presets: ['babel-preset-gatsby'],
+                },
+            }),
+        ],
     });
 };
