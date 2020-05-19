@@ -10,16 +10,18 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn run rollup -c",
+    "build": "rm -rf dist && yarn run babel src --out-dir dist",
+    "watch": "rm -rf dist && yarn run babel src --out-dir dist --watch",
     "test": "yarn run jest"
   },
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.8.3",
+    "autoprefixer": "^9.8.0",
     "babel-generator": "^6.26.1",
     "css": "^2.2.4",
-    "find-yarn-workspace-root": "1.2.1",
     "loader-utils": "2.0.0",
-    "mkdirp": "1.0.4",
+    "postcss": "^7.0.30",
+    "postcss-nested": "^4.2.1",
     "stylis": "^3.5.4"
   },
   "gitHead": "f6b8c7caf6395c1aefe2cd88a1538376274523a6"

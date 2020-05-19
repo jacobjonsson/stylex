@@ -1,5 +1,6 @@
+import postcss from 'postcss';
+import postcssNested from 'postcss-nested';
 import { parse } from 'css';
-import stylis from 'stylis';
 
 const SEL = '_';
 const SELRE = new RegExp('^' + SEL);
@@ -10,8 +11,8 @@ const SELRE = new RegExp('^' + SEL);
  * @returns {object}
  */
 export default function cssToObj(css) {
-    const wrapped = stylis(SEL, css);
-    const ast = parse(wrapped);
+    const a = postcss([postcssNested]).process(`${SEL} {${css}}`).css;
+    const ast = parse(a);
     return transform(ast.stylesheet.rules);
 }
 
@@ -35,17 +36,15 @@ function transform(rules, result = {}) {
             Object.assign(result, getDeclarations(rule.declarations));
         }
     });
+
     return result;
 }
 
 function getDeclarations(decs) {
-    return decs
-        .map((d) => ({
-            key: d.property,
-            value: d.value,
-        }))
-        .reduce((a, b) => {
-            a[b.key] = b.value;
-            return a;
-        }, {});
+    return decs.reduce((acc, d) => {
+        return {
+            ...acc,
+            [d.property]: d.value,
+        };
+    }, {});
 }

@@ -6,6 +6,8 @@ const base = stylex`
   background-color: red;
   padding: 20px;
   color: white;
+  display: flex;
+  justify-content: center;
 `;
 
 export default function Child2() {
