@@ -2,8 +2,13 @@ import jsx from '@babel/plugin-syntax-jsx';
 import generate from 'babel-generator';
 import loadConfig from './utils/loadConfig';
 
+/**
+ *
+ * @param {Object} options
+ * @param {import('./StyleSheet').StyleSheet} options.stylesheet
+ */
 export function createBabelPlugin(options) {
-    const { store } = options;
+    const { stylesheet } = options;
 
     return function babelPlugin(babel) {
         const theme = loadConfig().theme;
@@ -13,15 +18,15 @@ export function createBabelPlugin(options) {
             inherits: jsx,
             visitor: {
                 TaggedTemplateExpression(path) {
-                    let t = babel.types;
-                    let { quasi, tag } = path.node;
+                    const t = babel.types;
+                    const { quasi, tag } = path.node;
 
                     if (tag.name !== 'stylex') {
                         return;
                     }
 
                     let cssText = '';
-                    let expressions = path.get('quasi').get('expressions');
+                    const expressions = path.get('quasi').get('expressions');
 
                     quasi.quasis.forEach((el, i) => {
                         cssText += el.value.cooked;
@@ -36,7 +41,7 @@ export function createBabelPlugin(options) {
                         }
                     });
 
-                    const className = store.create(cssText);
+                    const className = stylesheet.addCSS(cssText);
                     path.replaceWith(t.stringLiteral(className));
                 },
             },

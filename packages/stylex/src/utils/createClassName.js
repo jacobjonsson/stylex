@@ -1,6 +1,10 @@
+/**
+ * Fork from https://github.com/sindresorhus/fnv1a
+ */
+
 function fnv1a(string) {
     // Handle Unicode code points > 0x7f
-    let hash = Number(FNV_OFFSET);
+    let hash = Number(2166136261n);
     let isUnicoded = false;
 
     for (let i = 0; i < string.length; i++) {

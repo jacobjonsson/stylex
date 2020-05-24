@@ -1,33 +1,18 @@
-/**
- * The custom `sort` method for
- * for the [`css-mqpacker`](https://www.npmjs.com/package/css-mqpacker) or
- * [`pleeease`](https://www.npmjs.com/package/pleeease) which using `css-mqpacker`
- * or, perhaps, something else ))
- *
- * @module sort-css-media-queries
- * @author Oleg Dutchenko <dutchenko.o.wezom@gmail.com>
- * @version 1.5.0
- */
-
-// ----------------------------------------
-// Private
-// ----------------------------------------
-
 const minMaxWidth = /(!?\(\s*min(-device-)?-width).+\(\s*max(-device)?-width/i;
 const minWidth = /\(\s*min(-device)?-width/i;
 const maxMinWidth = /(!?\(\s*max(-device)?-width).+\(\s*min(-device)?-width/i;
 const maxWidth = /\(\s*max(-device)?-width/i;
 
-const isMinWidth = _testQuery(minMaxWidth, maxMinWidth, minWidth);
-const isMaxWidth = _testQuery(maxMinWidth, minMaxWidth, maxWidth);
+const isMinWidth = testQuery(minMaxWidth, maxMinWidth, minWidth);
+const isMaxWidth = testQuery(maxMinWidth, minMaxWidth, maxWidth);
 
 const minMaxHeight = /(!?\(\s*min(-device)?-height).+\(\s*max(-device)?-height/i;
 const minHeight = /\(\s*min(-device)?-height/i;
 const maxMinHeight = /(!?\(\s*max(-device)?-height).+\(\s*min(-device)?-height/i;
 const maxHeight = /\(\s*max(-device)?-height/i;
 
-const isMinHeight = _testQuery(minMaxHeight, maxMinHeight, minHeight);
-const isMaxHeight = _testQuery(maxMinHeight, minMaxHeight, maxHeight);
+const isMinHeight = testQuery(minMaxHeight, maxMinHeight, minHeight);
+const isMaxHeight = testQuery(maxMinHeight, minMaxHeight, maxHeight);
 
 const isPrint = /print/i;
 const isPrintOnly = /^print$/i;
@@ -36,13 +21,10 @@ const maxValue = Number.MAX_VALUE;
 
 /**
  * Obtain the length of the media request in pixels.
- * Copy from original source `function inspectLength (length)`
- * {@link https://github.com/hail2u/node-css-mqpacker/blob/master/index.js#L58}
- * @private
  * @param {string} length
  * @return {number}
  */
-function _getQueryLength(length) {
+function getQueryLength(length) {
     length = /(-?\d*\.?\d+)(ch|em|ex|px|rem)/.exec(length);
 
     if (length === null) {
@@ -82,7 +64,7 @@ function _getQueryLength(length) {
  * @param {RegExp} singleTest
  * @return {Function}
  */
-function _testQuery(doubleTestTrue, doubleTestFalse, singleTest) {
+function testQuery(doubleTestTrue, doubleTestFalse, singleTest) {
     /**
      * @param {string} query
      * @return {boolean}
@@ -103,7 +85,7 @@ function _testQuery(doubleTestTrue, doubleTestFalse, singleTest) {
  * @param {string} b
  * @return {number|null}
  */
-function _testIsPrint(a, b) {
+function testIsPrint(a, b) {
     const isPrintA = isPrint.test(a);
     const isPrintOnlyA = isPrintOnly.test(a);
 
@@ -129,19 +111,14 @@ function _testIsPrint(a, b) {
     return null;
 }
 
-// ----------------------------------------
-// Public
-// ----------------------------------------
-
 /**
- * Sorting an array with media queries
- * according to the mobile-first methodology.
+ * Sorts the media queries with a mobile first approach.
  * @param {string} a
  * @param {string} b
  * @return {number} 1 / 0 / -1
  */
 export function sortCSSmq(a, b) {
-    const testIsPrint = _testIsPrint(a, b);
+    const testIsPrint = testIsPrint(a, b);
     if (testIsPrint !== null) {
         return testIsPrint;
     }
@@ -159,8 +136,8 @@ export function sortCSSmq(a, b) {
         return 1;
     }
 
-    let lengthA = _getQueryLength(a);
-    let lengthB = _getQueryLength(b);
+    let lengthA = getQueryLength(a);
+    let lengthB = getQueryLength(b);
 
     if (lengthA === maxValue && lengthB === maxValue) {
         return a.localeCompare(b);

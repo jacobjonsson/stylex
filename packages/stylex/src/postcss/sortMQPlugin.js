@@ -2,7 +2,7 @@ import postcss from 'postcss';
 import { sortCSSmq } from './sortCssMediaQueries';
 
 export const sortMQPlugin = postcss.plugin('postcss-sort-media-queries', () => {
-    return (root) => {
+    return function plugin(root) {
         let atRules = {};
 
         root.walkAtRules('media', (atRule) => {
