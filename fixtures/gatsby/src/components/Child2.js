@@ -8,6 +8,10 @@ const base = stylex`
   color: white;
   display: flex;
   justify-content: center;
+
+  @media (min-width: 768px) {
+    background-color: green;
+}
 `;
 
 export default function Child2() {

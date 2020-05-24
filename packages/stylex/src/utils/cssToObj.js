@@ -10,7 +10,7 @@ const SELRE = new RegExp('^' + SEL);
  * @param {string} css
  * @returns {object}
  */
-export default function cssToObj(css) {
+export function cssToObj(css) {
     const a = postcss([postcssNested]).process(`${SEL} {${css}}`).css;
     const ast = parse(a);
     return transform(ast.stylesheet.rules);

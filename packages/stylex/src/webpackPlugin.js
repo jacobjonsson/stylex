@@ -1,17 +1,13 @@
 import { OriginalSource } from 'webpack-sources';
-import postcss from 'postcss';
-import autoprefixer from 'autoprefixer';
-import { sortMQPlugin } from './postcss/sortMQPlugin';
 import { interpolateName } from 'loader-utils';
-import { Store } from './store';
+import { StyleSheet } from './StyleSheet';
+import { virtualModules } from './WebpackVirtualModules';
 
 const SWP = 'stylex-webpack-plugin';
 
 export class StylexPlugin {
     constructor(options = {}) {
-        this.store = new Store();
         this.babelOptions = options.babelOptions;
-        this.store = new Store();
     }
 
     /**
@@ -19,52 +15,58 @@ export class StylexPlugin {
      * @param {import('webpack').Compiler} compiler
      */
     apply(compiler) {
-        compiler.hooks.normalModuleFactory.tap(SWP, (normalModuleFactory) => {
-            normalModuleFactory.hooks.afterResolve.tapAsync(SWP, (data, callback) => {
-                data.loaders.push({
-                    loader: require.resolve('./loader'),
+        compiler.apply(virtualModules);
+        compiler.options.module.rules.splice(0, 0, {
+            test: /\.(js)$/,
+            enforce: 'pre',
+            use: [
+                {
+                    loader: require.resolve('./WebpackLoader'),
                     options: {
-                        store: this.store,
                         babelOptions: this.babelOptions,
                     },
-                });
-
-                callback(null, data);
-            });
+                },
+            ],
         });
 
-        compiler.hooks.thisCompilation.tap(SWP, (compilation) => {
-            compilation.hooks.additionalAssets.tapAsync(SWP, async (callback) => {
-                const css = await this.store.extractCSS();
+        // compiler.hooks.thisCompilation.tap(SWP, (compilation) => {
+        //     compilation.hooks.additionalAssets.tapAsync(SWP, async (callback) => {
+        //         const css = await this.stylesheet.extractCSS();
 
-                const hash = interpolateName(
-                    {},
-                    `[hash:${compiler.options.output.hashDigestLength}]`,
-                    { content: css },
-                );
-                const basename = `stylex-${hash}`;
-                const filename = `${basename}.css`;
+        //         // We have no css, no work be done.
+        //         if (css.length < 1) {
+        //             return callback();
+        //         }
 
-                // If the file does not already exists, let's create it.
-                if (!compilation.assets[filename]) {
-                    const content = new OriginalSource(css, basename);
-                    compilation.assets[filename] = content;
-                }
+        //         const hash = interpolateName(
+        //             {},
+        //             `[hash:${compiler.options.output.hashDigestLength}]`,
+        //             { content: css },
+        //         );
+        //         const basename = `stylex-${hash}`;
+        //         const filename = `${basename}.css`;
 
-                // Append the file to the chunks with requests.
-                this.findChunksWithRequests(compilation).forEach((chunk) => {
-                    chunk.files.push(filename);
-                });
+        //         // If the file does not already exists, let's create it.
+        //         if (!compilation.assets[filename]) {
+        //             const content = new OriginalSource(css, basename);
+        //             compilation.assets[filename] = content;
+        //         }
 
-                callback();
-            });
-        });
+        //         // Append the file to the chunks with requests.
+        //         this.findChunksWithRequests(compilation).forEach((chunk) => {
+        //             console.log(chunk.name);
+        //             chunk.files.push(filename);
+        //         });
+
+        //         callback();
+        //     });
+        // });
     }
 
     findChunksWithRequests(compilation) {
         const chunks = compilation.chunks;
         // Map css request for faster lookup.
-        const cssRequest = this.store.getRequests().reduce(
+        const cssRequest = this.stylesheet.getRequests().reduce(
             (acc, curr) => ({
                 ...acc,
                 [curr]: curr,

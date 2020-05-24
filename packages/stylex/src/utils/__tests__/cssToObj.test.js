@@ -1,4 +1,4 @@
-import cssToObj from '../cssToObj';
+import { cssToObj } from '../cssToObj';
 
 it('should parse css string', () => {
     const cssString = `
