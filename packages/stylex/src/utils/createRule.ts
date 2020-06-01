@@ -1,12 +1,13 @@
 /**
  * Creates a css rule.
- * @param {string} className
- * @param {string} property
- * @param {string} value
- * @param {string} [children]
- * @param {string} [media]
  */
-export function createRule(className, property, value, children = '', media) {
+export function createRule(
+    className: string,
+    property: string,
+    value: string | number,
+    children: string = '',
+    media?: string,
+) {
     const selector = `.${className} ${children}`.trim();
     const rule = `${selector} { ${property}: ${value}; }`;
 

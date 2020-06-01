@@ -1,27 +1,24 @@
+import { NodePath, types } from '@babel/core';
+// @ts-ignore
 import jsx from '@babel/plugin-syntax-jsx';
 import generate from 'babel-generator';
 import loadConfig from './utils/loadConfig';
 
-/**
- *
- * @param {Object} options
- * @param {import('./StyleSheet').StyleSheet} options.stylesheet
- */
-export function createBabelPlugin(options) {
+export function createBabelPlugin(options: Record<string, any>) {
     const { stylesheet } = options;
 
-    return function babelPlugin(babel) {
+    return function babelPlugin(babel: any) {
         const theme = loadConfig().theme;
 
         return {
             name: 'stylex',
             inherits: jsx,
             visitor: {
-                TaggedTemplateExpression(path) {
+                TaggedTemplateExpression(path: NodePath<types.TaggedTemplateExpression>) {
                     const t = babel.types;
                     const { quasi, tag } = path.node;
 
-                    if (tag.name !== 'stylex') {
+                    if (!('name' in tag) || tag.name !== 'stylex') {
                         return;
                     }
 
@@ -33,6 +30,7 @@ export function createBabelPlugin(options) {
                         let expression = expressions[i];
 
                         if (t.isArrowFunctionExpression(expression)) {
+                            // @ts-ignore
                             const { code } = generate(expression.node);
 
                             // Execute the stringified function from the css

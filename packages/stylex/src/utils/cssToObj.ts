@@ -1,6 +1,6 @@
 import postcss from 'postcss';
 import postcssNested from 'postcss-nested';
-import { parse } from 'css';
+import { parse, StyleRules } from 'css';
 
 const SEL = '_';
 const SELRE = new RegExp('^' + SEL);
@@ -10,18 +10,26 @@ const SELRE = new RegExp('^' + SEL);
  * @param {string} css
  * @returns {object}
  */
-export function cssToObj(css) {
+export function cssToObj(css: string) {
     const a = postcss([postcssNested]).process(`${SEL} {${css}}`).css;
     const ast = parse(a);
+    if (!ast.stylesheet) {
+        return {};
+    }
+
     return transform(ast.stylesheet.rules);
 }
 
-function transform(rules, result = {}) {
+function transform(rules: StyleRules['rules'], result: Record<string, any> = {}) {
     rules.forEach((rule) => {
-        if (rule.type === 'media') {
+        if ('media' in rule && 'rules' in rule && rule.rules) {
             const key = '@media ' + rule.media;
             const decs = transform(rule.rules);
             result[key] = decs;
+            return;
+        }
+
+        if (!('selectors' in rule) || !rule.selectors) {
             return;
         }
 
@@ -29,19 +37,23 @@ function transform(rules, result = {}) {
         const key = selector.replace(SELRE, '').trim();
 
         if (key.length) {
-            Object.assign(result, {
+            result = {
+                ...result,
                 [key]: getDeclarations(rule.declarations),
-            });
+            };
         } else {
-            Object.assign(result, getDeclarations(rule.declarations));
+            result = {
+                ...result,
+                ...getDeclarations(rule.declarations),
+            };
         }
     });
 
     return result;
 }
 
-function getDeclarations(decs) {
-    return decs.reduce((acc, d) => {
+function getDeclarations(decs: any) {
+    return decs.reduce((acc: any, d: any) => {
         return {
             ...acc,
             [d.property]: d.value,

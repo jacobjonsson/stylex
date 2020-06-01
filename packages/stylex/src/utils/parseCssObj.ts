@@ -6,11 +6,8 @@ const AT_RULE_REGEX = /^@/;
 
 /**
  * Parses a css object into a valid css string.
- * @param {Object} obj
- * @param {string} [children]
- * @param {string} [media]
  */
-export function parseCssObj(obj, children = '', media) {
+export function parseCssObj(obj: Record<string, any>, children?: string, media?: string): any[] {
     const rules = [];
 
     for (const [property, value] of Object.entries(obj)) {

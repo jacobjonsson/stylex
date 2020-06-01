@@ -14,8 +14,8 @@ export default function loadConfig() {
     }
 }
 
-function processConfig(source) {
-    const code = `return ${source.replace('module.exports =', '').replace('export default')}`;
+function processConfig(source: string) {
+    const code = `return ${source.replace('module.exports =', '').replace('export default', '')}`;
     const fn = new Function(code);
     return fn();
 }

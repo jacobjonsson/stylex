@@ -4,20 +4,20 @@ it('should extract the correct css for a simple use case', async () => {
     const stylesheet = new StyleSheet();
 
     let classNames = stylesheet.addCSS(`margin-top: 10px;`);
-    expect(classNames).toMatchInlineSnapshot(`"x5xanau"`);
+    expect(classNames).toMatchInlineSnapshot(`"sx_7h5m42"`);
 
     let css = await stylesheet.extractCSS();
-    expect(css).toMatchInlineSnapshot(`".x5xanau { margin-top: 10px; }"`);
+    expect(css).toMatchInlineSnapshot(`".sx_7h5m42 { margin-top: 10px; }"`);
 });
 
 it('should prefix css', async () => {
     const stylesheet = new StyleSheet();
 
     let classNames = stylesheet.addCSS(`display: flex;`);
-    expect(classNames).toMatchInlineSnapshot(`"x110k4so"`);
+    expect(classNames).toMatchInlineSnapshot(`"sx_bmtag4"`);
 
     let css = await stylesheet.extractCSS();
-    expect(css).toMatchInlineSnapshot(`".x110k4so { display: flex; }"`);
+    expect(css).toMatchInlineSnapshot(`".sx_bmtag4 { display: flex; }"`);
 });
 
 it('should handle nested selectors', async () => {
@@ -32,13 +32,13 @@ it('should handle nested selectors', async () => {
             display: block;
         }
     `);
-    expect(classNames).toMatchInlineSnapshot(`"x110k4so x1lyhycu x1ug13u9"`);
+    expect(classNames).toMatchInlineSnapshot(`"sx_bmtag4 sx_1bo7ynu sx_3t7k31"`);
 
     let css = await stylesheet.extractCSS();
     expect(css).toMatchInlineSnapshot(`
-        ".x110k4so { display: flex; }
-        .x1lyhycu > p { display: block; }
-        @media (min-width: 768px) { .x1ug13u9 { display: block; } }"
+        ".sx_bmtag4 { display: flex; }
+        .sx_1bo7ynu undefined> p { display: block; }
+        @media (min-width: 768px) { .sx_3t7k31.sx_3t7k31 { display: block; } }"
     `);
 });
 
@@ -51,12 +51,12 @@ it('should handle pseudo selectors', async () => {
             background-color: blue;
         }
     `);
-    expect(classNames).toMatchInlineSnapshot(`"x1t4qh4s x1msjykb"`);
+    expect(classNames).toMatchInlineSnapshot(`"sx_14kbzww sx_1x1cqep"`);
 
     let css = await stylesheet.extractCSS();
     expect(css).toMatchInlineSnapshot(`
-        ".x1t4qh4s { background-color: red; }
-        .x1msjykb :focus { background-color: blue; }"
+        ".sx_14kbzww { background-color: red; }
+        .sx_1x1cqep undefined:focus { background-color: blue; }"
     `);
 });
 
@@ -69,10 +69,11 @@ it('should handle media quries and place them at the bottom', async () => {
         }
         display: flex;
     `);
-    expect(classNames).toMatchInlineSnapshot(`"x110k4so x1ug13u9"`);
+    expect(classNames).toMatchInlineSnapshot(`"sx_bmtag4 sx_3t7k31"`);
 
     let css = await stylesheet.extractCSS();
-    expect(css).toMatchInlineSnapshot(
-        `".x110k4so { display: flex; } @media (min-width: 768px) { .x1ug13u9 { display: block; } }"`,
-    );
+    expect(css).toMatchInlineSnapshot(`
+        ".sx_bmtag4 { display: flex; }
+        @media (min-width: 768px) { .sx_3t7k31.sx_3t7k31 { display: block; } }"
+    `);
 });

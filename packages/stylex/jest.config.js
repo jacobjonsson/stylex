@@ -6,6 +6,7 @@ module.exports = {
     rootDir: '../..',
     name: pkg.name,
     displayName: pkg.name,
+    preset: 'ts-jest',
     testMatch: [
         '<rootDir>/packages/stylex/src/**/*.test.(tsx|ts|js)',
         '<rootDir>/packages/stylex/src/**/*.test.(tsx|ts|js)',
