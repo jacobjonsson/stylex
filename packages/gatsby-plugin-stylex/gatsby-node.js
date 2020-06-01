@@ -1,4 +1,4 @@
-const { StylexPlugin } = require('@jacobjonsson/stylex/dist/webpackPlugin');
+const { StylexPlugin } = require('@jacobjonsson/stylex/dist/WebpackPlugin');
 
 exports.onCreateWebpackConfig = ({ rules, actions, getConfig, stage }) => {
     actions.setWebpackConfig({

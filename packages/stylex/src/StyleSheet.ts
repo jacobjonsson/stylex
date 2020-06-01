@@ -2,6 +2,9 @@ import { cssToObj } from './utils/cssToObj';
 import { parseCssObj } from './utils/parseCssObj';
 
 export class StyleSheet {
+    ruleCache: Map<string, string>;
+    requestCache: Set<string>;
+
     constructor() {
         /**
          * The internal rule cache.
@@ -19,10 +22,8 @@ export class StyleSheet {
     /**
      * Adds css to the style sheet.
      * Returns the a string of classes representing the styles.
-     * @param {string} css
-     * @returns
      */
-    addCSS(css) {
+    addCSS(css: string) {
         const obj = cssToObj(css);
         const rules = parseCssObj(obj);
         const locals = [];
@@ -43,7 +44,7 @@ export class StyleSheet {
      * When emitting the css file, it will be added as a dependency for all the files in the request array.
      * @param {string} file
      */
-    addCSSRequest(file) {
+    addCSSRequest(file: string) {
         this.requestCache.add(file);
     }
 

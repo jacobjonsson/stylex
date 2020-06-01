@@ -1,8 +1,11 @@
-const FNV_OFFSET = 2166136261n;
+/**
+ * Fork from https://github.com/sindresorhus/fnv1a
+ */
 
-export default function fnv1a(string) {
+function fnv1a(string: string) {
     // Handle Unicode code points > 0x7f
-    let hash = Number(FNV_OFFSET);
+    // @ts-ignore
+    let hash = Number(2166136261n);
     let isUnicoded = false;
 
     for (let i = 0; i < string.length; i++) {
@@ -20,4 +23,8 @@ export default function fnv1a(string) {
     }
 
     return hash >>> 0;
+}
+
+export function createClassName(seed: string) {
+    return 'sx_' + fnv1a(seed).toString(36);
 }

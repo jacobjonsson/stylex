@@ -10,8 +10,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist && yarn run babel src --out-dir dist",
-    "watch": "rm -rf dist && yarn run babel src --out-dir dist --watch",
+    "build": "rm -rf dist && tsc",
+    "watch": "rm -rf dist && tsc --watch",
     "test": "yarn run jest"
   },
   "dependencies": {
