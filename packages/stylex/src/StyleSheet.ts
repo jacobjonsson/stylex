@@ -1,5 +1,4 @@
-import { cssToObj } from './utils/cssToObj';
-import { parseCssObj } from './utils/parseCssObj';
+import { transformCSSString } from './lib/transformCSSString';
 
 export class StyleSheet {
     ruleCache: Map<string, string>;
@@ -24,12 +23,11 @@ export class StyleSheet {
      * Returns the a string of classes representing the styles.
      */
     addCSS(css: string) {
-        const obj = cssToObj(css);
-        const rules = parseCssObj(obj);
+        const rules = transformCSSString(css);
         const locals = [];
 
         for (const rule of rules) {
-            if (!this.ruleCache.has(rule)) {
+            if (!this.ruleCache.has(rule.className)) {
                 this.ruleCache.set(rule.className, rule.css);
             }
 
