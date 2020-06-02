@@ -16,13 +16,10 @@
   },
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.8.3",
-    "autoprefixer": "^9.8.0",
     "babel-generator": "^6.26.1",
-    "css": "^2.2.4",
     "loader-utils": "2.0.0",
     "postcss": "^7.0.30",
     "postcss-nested": "^4.2.1",
-    "stylis": "^3.5.4",
     "webpack-virtual-modules": "^0.2.2"
   },
   "gitHead": "f6b8c7caf6395c1aefe2cd88a1538376274523a6"

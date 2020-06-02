@@ -12,6 +12,10 @@ const base = stylex`
   @media (min-width: 768px) {
     background-color: green;
 }
+
+    @supports (display: flex) {
+        background-color: pink;
+    }
 `;
 
 export default function Child2() {

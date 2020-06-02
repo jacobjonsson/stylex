@@ -4,3 +4,4 @@ rollup.config.js
 yarn-error.log
 .babelrc
 jest.config.js
+tsconfig.json
