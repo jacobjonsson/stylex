@@ -1,4 +1,5 @@
 import { transformCSSString } from './lib/transformCSSString';
+import { generateResponsiveStyles } from './lib/generateResponsiveStyles';
 
 export class StyleSheet {
     ruleCache: Map<string, string>;
@@ -35,6 +36,18 @@ export class StyleSheet {
         }
 
         return locals.join(' ');
+    }
+
+    generateResponsiveStyles(property: string, values: Record<string, string | number>) {
+        const { rules, styleRefs } = generateResponsiveStyles(property, values);
+
+        for (const rule of rules) {
+            if (!this.ruleCache.has(rule.className)) {
+                this.ruleCache.set(rule.className, rule.css);
+            }
+        }
+
+        return styleRefs;
     }
 
     /**

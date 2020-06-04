@@ -1,11 +1,11 @@
 import React from 'react';
 import { stylex, cx } from '@jacobjonsson/stylex';
 import './Child1.css';
+import { Box } from './Box';
 
 const base = stylex`
   font-size: 16px;
   background-color: red;
-  padding: 20px;
   color: white;
 
   @media (min-width: 768px) {
@@ -18,5 +18,9 @@ const base = stylex`
 `;
 
 export default function Child1() {
-    return <div className={cx('background', base)}>Child 1</div>;
+    return (
+        <Box padding="medium" className={cx('background', base)}>
+            Child 1
+        </Box>
+    );
 }
