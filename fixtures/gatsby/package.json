@@ -14,8 +14,9 @@
   "license": "MIT",
   "scripts": {
     "clear:babel-cache": "rimraf -rf ./node_modules/.cache/babel-loader/*",
-    "prestart": "yarn run clear:babel-cache",
-    "prebuild": "yarn run clear:babel-cache",
+    "clear:node-modules": "rimraf -rf ./node_modules/@jacobjonsson/stylex/*",
+    "prestart": "yarn run clear:babel-cache && yarn run clear:node-modules",
+    "prebuild": "yarn run clear:babel-cache  && yarn run clear:node-modules",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
