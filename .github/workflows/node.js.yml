@@ -26,4 +26,3 @@ jobs:
             - run: yarn
             - run: yarn build:core
             - run: yarn test
-            - run: yarn gatsby:build
