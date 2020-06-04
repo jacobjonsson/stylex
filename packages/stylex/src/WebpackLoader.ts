@@ -8,20 +8,20 @@ import { virtualModules } from './WebpackVirtualModules';
 export default async function loader(this: webpack.loader.LoaderContext, source: string) {
     const callback = this.async() as webpack.loader.loaderCallback;
 
-    if (!/stylex`/.test(source)) {
+    if (!source.includes('@jacobjonsson/stylex')) {
         return callback(null, source);
     }
 
     const stylesheet = new StyleSheet();
 
-    const { babelOptions } = loaderUtils.getOptions(this) as Record<string, any>;
+    const { babelOptions, theme } = loaderUtils.getOptions(this) as Record<string, any>;
 
     /** @type {import('./StyleSheet').StyleSheet} */
     const { babelPresets = [], babelPlugins = [] } = babelOptions;
 
     const result = transformSync(source, {
         presets: babelPresets,
-        plugins: [...babelPlugins, createBabelPlugin({ stylesheet })],
+        plugins: [...babelPlugins, createBabelPlugin({ stylesheet, theme })],
         babelrc: false,
         configFile: false,
     });

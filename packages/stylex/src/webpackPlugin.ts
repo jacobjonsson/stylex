@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import { virtualModules } from './WebpackVirtualModules';
+import loadConfig from './utils/loadConfig';
 
 export class StylexPlugin implements webpack.Plugin {
     babelOptions: Record<string, any>;
@@ -19,6 +20,7 @@ export class StylexPlugin implements webpack.Plugin {
                     loader: require.resolve('./WebpackLoader'),
                     options: {
                         babelOptions: this.babelOptions,
+                        theme: loadConfig().theme,
                     },
                 },
             ],

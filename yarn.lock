@@ -1155,6 +1155,18 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
+"@jacobjonsson/stylex@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@jacobjonsson/stylex/-/stylex-0.1.0.tgz#e3557bb7f87af24c154cbcd4ab1d280cb2b80b71"
+  integrity sha512-i5VU3jzGH5o4Pwvr/kHJ4tGjauQThJB79rN6CJ8907t1QyV0VXf3bE85Tis13AVP+782+iW+80IxLzQKJ85Kjg==
+  dependencies:
+    "@babel/plugin-syntax-jsx" "^7.8.3"
+    babel-generator "^6.26.1"
+    loader-utils "2.0.0"
+    postcss "^7.0.30"
+    postcss-nested "^4.2.1"
+    webpack-virtual-modules "^0.2.2"
+
 "@jest/console@^26.0.1":
   version "26.0.1"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-26.0.1.tgz#62b3b2fa8990f3cbffbef695c42ae9ddbc8f4b39"
