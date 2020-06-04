@@ -2,11 +2,20 @@ import webpack from 'webpack';
 import { virtualModules } from './WebpackVirtualModules';
 import loadConfig from './utils/loadConfig';
 
+export interface StylexPluginOptions {
+    babelOptions: {
+        presets: string[];
+        plugins: string[];
+    };
+}
+
 export class StylexPlugin implements webpack.Plugin {
     babelOptions: Record<string, any>;
+    config: Record<string, any>;
 
-    constructor(options: Record<string, any> = {}) {
+    constructor(options: StylexPluginOptions) {
         this.babelOptions = options.babelOptions;
+        this.config = loadConfig();
     }
 
     apply(compiler: webpack.Compiler) {
@@ -20,7 +29,7 @@ export class StylexPlugin implements webpack.Plugin {
                     loader: require.resolve('./WebpackLoader'),
                     options: {
                         babelOptions: this.babelOptions,
-                        theme: loadConfig().theme,
+                        theme: this.config.theme,
                     },
                 },
             ],
