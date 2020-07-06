@@ -1,0 +1,22 @@
+{
+  "name": "@fixtures/next",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jacob Jonsson",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "clear:babel-cache": "rimraf -rf ./node_modules/.cache/babel-loader/*",
+    "clear:node-modules": "rimraf -rf ./node_modules/@jacobjonsson/stylex/*",
+    "prestart": "yarn run clear:babel-cache && yarn run clear:node-modules",
+    "start": "next dev",
+    "build": "next build",
+    "serve": "next start"
+  },
+  "dependencies": {
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "@jacobjonsson/stylex": "0.1.0"
+  }
+}
