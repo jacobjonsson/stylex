@@ -14,8 +14,12 @@
     "build:core": "yarn workspace @jacobjonsson/stylex build",
     "watch:core": "yarn workspace @jacobjonsson/stylex watch",
     "cra:build": "yarn build:core && yarn workspace @fixtures/cra build",
+    "next:develop": "yarn build:core && yarn workspace @fixtures/next start",
+    "next:build": "yarn build:core && yarn workspace @fixtures/next build",
+    "next:serve": "yarn workspace @fixtures/next serve",
     "gatsby:develop": "yarn build:core && yarn workspace @fixtures/gatsby develop",
-    "gatsby:build": "yarn build:core && yarn workspace @fixtures/gatsby build"
+    "gatsby:build": "yarn build:core && yarn workspace @fixtures/gatsby build",
+    "gatsby:serve": "yarn workspace @fixtures/gatsby serve"
   },
   "devDependencies": {
     "@types/babel-generator": "^6.25.3",

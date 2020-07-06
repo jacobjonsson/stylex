@@ -14,7 +14,7 @@ export default async function loader(this: webpack.loader.LoaderContext, source:
 
     const stylesheet = new StyleSheet();
 
-    const { babelOptions, theme, extract } = loaderUtils.getOptions(this) as Record<string, any>;
+    const { babelOptions, theme } = loaderUtils.getOptions(this) as Record<string, any>;
 
     /** @type {import('./StyleSheet').StyleSheet} */
     const { babelPresets = [], babelPlugins = [] } = babelOptions;
@@ -30,18 +30,14 @@ export default async function loader(this: webpack.loader.LoaderContext, source:
         throw new Error(`Failed to transform ${this.request}`);
     }
 
-    if (extract === 'module') {
-        const css = await stylesheet.extractCSS();
+    const css = await stylesheet.extractCSS();
 
-        const virtualCssLocation = loaderUtils.interpolateName(
-            this,
-            '[path][name].[hash:base64:7].css',
-            { content: css },
-        );
-        virtualModules.writeModule(virtualCssLocation, css);
+    const virtualCssLocation = loaderUtils.interpolateName(
+        this,
+        '[path][name].[hash:base64:7].css',
+        { content: css },
+    );
+    virtualModules.writeModule(virtualCssLocation, css);
 
-        callback(null, `import "${virtualCssLocation}"\n${result.code}`);
-    } else {
-        callback(null, result.code);
-    }
+    callback(null, `import "${virtualCssLocation}"\n${result.code}`);
 }
