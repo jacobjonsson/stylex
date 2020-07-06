@@ -1,6 +1,6 @@
 # Stylex
 
-Themable CSS in JS with no runtime. All styles are extracted during compile time.
+Themable CSS in JS with no runtime. All styles are extracted at compile time.
 
 ```jsx
 import { stylex, cx } from '@jacobjonsson/stylex';
@@ -43,8 +43,3 @@ module.exports = {
     ....
 };
 ```
-
-## Task list
-
--   [x] Static extraction using webpack loader
--   [ ] Support for theme functions inside css
